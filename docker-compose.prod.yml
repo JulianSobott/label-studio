@@ -1,15 +1,15 @@
 services:
   nginx:
-      build: .
-      command: nginx
-      restart: unless-stopped
-      depends_on:
-        - app
-      environment:
-        - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
-      volumes:
-        - label_studio_data:/label-studio/data:rw
-      labels:
+    build: .
+    command: nginx
+    restart: unless-stopped
+    depends_on:
+      - app
+    environment:
+      - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
+    volumes:
+      - label_studio_data:/label-studio/data:rw
+    labels:
       - "traefik.enable=true"
       - "traefik.docker.network=traefik"
       - "traefik.http.routers.bm_rating.rule=Host(`bm-rating.lol-stats.de`)"
@@ -17,18 +17,18 @@ services:
       - "traefik.http.routers.bm_rating.tls=true"
       - "traefik.http.routers.bm_rating.tls.certresolver=le"
       - "traefik.http.routers.bm_rating.entrypoints=websecure"
-      networks:
-        - default
-        - traefik
+    networks:
+      - default
+      - traefik
 
-    app:
-      stdin_open: true
-      tty: true
-      build: .
-      restart: unless-stopped
-      depends_on:
-        - db
-      environment:
+  app:
+    stdin_open: true
+    tty: true
+    build: .
+    restart: unless-stopped
+    depends_on:
+      - db
+    environment:
       - DJANGO_DB=default
       - POSTGRE_NAME=postgres
       - POSTGRE_USER=postgres
@@ -37,21 +37,21 @@ services:
       - POSTGRE_HOST=db
       - LABEL_STUDIO_HOST=${LABEL_STUDIO_HOST:-}
       - JSON_LOG=1
-      volumes:
-        - label_studio_data:/label-studio/data:rw
-      networks:
-        - default
+    volumes:
+      - label_studio_data:/label-studio/data:rw
+    networks:
+      - default
 
 
-    db:
-      image: postgres:11.5
-      restart: unless-stopped
-      environment:
+  db:
+    image: postgres:11.5
+    restart: unless-stopped
+    environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
-      volumes:
-        - pg_data:/var/lib/postgresql/data
-      networks:
-        - default
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - default
 
 volumes:
   label_studio_data:
