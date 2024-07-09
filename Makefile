@@ -15,7 +15,7 @@ shell-dev:
 	DJANGO_DB=sqlite LOG_DIR=tmp DEBUG=true LOG_LEVEL=DEBUG DJANGO_SETTINGS_MODULE=core.settings.label_studio python label_studio/manage.py shell_plus
 
 docker-run-dev:
-	docker-compose up --build
+	docker compose up --build
 
 docker-migrate-dev:
 	docker-compose run app python3 /label-studio/label_studio/manage.py migrate

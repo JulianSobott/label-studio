@@ -2454,6 +2454,18 @@
       }
     }
   },
+  "IFrame": {
+    "name": "IFrame",
+    "description": "The `IFrame` tag is used to show an iframe on the labeling interface.",
+    "attrs": {
+      "value": {
+        "name": "value",
+        "description": "URL of IFrame, either static text or the field name in data to use for the IFrame",
+        "type": "string",
+        "required": true
+      }
+    }
+  },
   "View": {
     "name": "View",
     "description": "The `View` element is used to configure the display of blocks, similar to the div tag in HTML.",

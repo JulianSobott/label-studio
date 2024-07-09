@@ -18,6 +18,7 @@ _DATA_TYPES = {
     'Text': [str, int, float, list],
     'Header': [str, int, float],
     'HyperText': [str],
+    'IFrame': [str],
     'Image': [str, list],
     'Paragraphs': [list, str],
     'Table': [dict, list, str],
